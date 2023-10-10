@@ -1,23 +1,18 @@
-const player = {
-    name : "soy",
-    points : 1234,
-    fat : true
-};
+const loginForm = document.querySelector("#login-form");
+const loginInput = document.querySelector("#login-form input");
+const greeting = document.querySelector("#greeting");
+const HIDEEN_CLASSNAME = "hidden";
+    // string만 포함된 변수는 대문자로 표기함(일종의 관습)
 
-console.log(player);
-console.log(player.name);
-// player -> object, name -> player 안 요소 
-// console -> object, log -> console 안에 존재하는 요소 
 
-console.log(player["name"]);
+function onLoginSubmit(event) {
+    event.preventDefault();
+    loginForm.classList.add(HIDEEN_CLASSNAME);
+    const username = loginInput.value;
+    localStorage.setItem("username", username)
+    greeting.innerText = `Hello ${username}`;
+    greeting.classList.remove(HIDEEN_CLASSNAME);
+}
 
-player.name = "Nico";
-console.log(player.name); // Nico로 출력 -> const(player)를 변경한 것이 아니라, object(const) 안 요소의 값을 변경한 것임
 
-//player = false; // const를 하나의 값으로 취급할 경우에 오류 발생 (player를 boolean 값으로 취급)
-
-player.lastName = "Lee";// object에 값 추가 
-console.log(player);
-
-player.points = player.points + 15; // points 값 update
-console.log(player.points);
+loginForm.addEventListener("submit", onLoginSubmit);
